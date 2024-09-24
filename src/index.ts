@@ -12,7 +12,19 @@
  */
 
 export default {
-	async fetch(request, env, ctx): Promise<Response> {
-		return new Response('Hello World!');
+	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+		console.log(request.body);
+		console.log(request.headers);
+		console.log(request.method);
+
+		if (request.method === "GET") {
+			return Response.json({
+				message: "You send a get request"
+			})
+		} else {
+			return Response.json({
+				message: "You didn't send a get request"
+			});
+		}
 	},
 } satisfies ExportedHandler<Env>;
